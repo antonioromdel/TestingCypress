@@ -2,6 +2,14 @@ describe("Test suite - conjunto de pruebas", () => {
 
     const url = "http://zero.webappsecurity.com"
 
+    function validarUserPasswd() {
+        cy.visit(url)
+        cy.get('#signin_button').click()
+        cy.get('#user_login').type("username")
+        cy.get('#user_password').type("password")
+        cy.get('.btn').click()
+    }
+
     it("Validar pagina de inicio", () => {
 
         // Comando para entrar en la web a testear
@@ -26,16 +34,16 @@ describe("Test suite - conjunto de pruebas", () => {
         cy.get('.alert').should("be.visible")
     })
 
-    it("Validar usuario y contraseña correcto", () => {
+    it("Validacion de login correcto", () => {
+        validarUserPasswd()
+    })
+
+    it("Validar Transferencia", () => {
 
         // Realizamos login con usuario y contraseña
         // Validamos que se puede realizar una transferencia existosa
 
-        cy.visit(url)
-        cy.get('#signin_button').click()
-        cy.get('#user_login').type("username")
-        cy.get('#user_password').type("password")
-        cy.get('.btn').click()
+        validarUserPasswd()
         cy.get('#transfer_funds_tab > a').click()
         cy.get('#tf_fromAccountId').select("1")
         cy.get('#tf_toAccountId').select("5")
