@@ -3,17 +3,19 @@ describe("Test suite - conjunto de pruebas", () => {
     const url = "http://zero.webappsecurity.com"
 
     function validarUserPasswd() {
-        cy.visit(url)
         cy.get('#signin_button').click()
         cy.get('#user_login').type("username")
         cy.get('#user_password').type("password")
         cy.get('.btn').click()
     }
 
-    it("Validar pagina de inicio", () => {
-
+    beforeEach(() => {
         // Comando para entrar en la web a testear
         cy.visit(url)
+    })
+
+    it("Validar pagina de inicio", () => {
+
         // Comando para comprobar que una imagen esté visible
         cy.get(".active > img").should("be.visible")
         // Comando para comprobar que un elemento contenga otro
@@ -27,7 +29,6 @@ describe("Test suite - conjunto de pruebas", () => {
     it("Validar usuario y contraseña vacio", () => {
         // Validamos que nos aparezca un error al intentar loguearnos con usuario y contraseña en blanco
 
-        cy.visit(url)
         cy.get('#signin_button').click()
         cy.get('#user_login').type(" ")
         cy.get('#user_password').type(" ")
