@@ -27,7 +27,8 @@ describe("Test suite - conjunto de pruebas", () => {
     it("Validar usuario y contraseña vacio", () => {
         // Validamos que nos aparezca un error al intentar loguearnos con usuario y contraseña en blanco
 
-        cy.visit("http://zero.webappsecurity.com/login.html")
+        cy.visit(url)
+        cy.get('#signin_button').click()
         cy.get('#user_login').type(" ")
         cy.get('#user_password').type(" ")
         cy.get('.btn').click()
